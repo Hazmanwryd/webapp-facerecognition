@@ -1,26 +1,64 @@
+// Assuming your attendance data structure looks like this
 "use client";
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
-export default function UserInfo() {
+const attendanceData = [
+  { id: "1", name: "John Doe", date: "2024-01-07", time: "09:00 AM" },
+  { id: "2", name: "Jane Dae", date: "2024-01-06", time: "10:30 AM" },
+  { id: "3", name: "Jane Die", date: "2024-01-06", time: "11:30 AM" },
+  { id: "4", name: "Jane Due", date: "2024-01-06", time: "12:30 AM" },
+  { id: "5", name: "Jane Dee", date: "2024-01-06", time: "13:30 AM" },
+  { id: "6", name: "Jane Doe", date: "2024-01-06", time: "14:30 AM" },
+  { id: "7", name: "Jane Foe", date: "2024-01-06", time: "15:30 AM" },
+  { id: "8", name: "Jane Hoe", date: "2024-01-06", time: "16:30 AM" },
+  { id: "9", name: "Jane Joe", date: "2024-01-06", time: "17:30 AM" },
+];
+
+export default function Userinfo() {
   const { data: session } = useSession();
 
   return (
-    <div className="grid place-items-center h-screen">
-      <div className="shadow-lg p-8 bg-zince-300/10 flex flex-col gap-2 my-6">
-        <div>
-          Name: <span className="font-bold">{session?.user?.name}</span>
+    <div className="h-screen flex flex-col">
+      {/* Navbar */}
+      <nav className="bg-green-600 p-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl text-white font-semibold">Attendance Dashboard</h1>
+          <div className="text-white">
+            Welcome, {session?.user?.name} |{" "}
+            <button onClick={() => signOut()} className="underline cursor-pointer">
+              Log Out
+            </button>
+          </div>
         </div>
-        <div>
-          Email: <span className="font-bold">{session?.user?.email}</span>
+      </nav>
+
+      {/* Main Content */}
+      <div className="flex-grow grid place-items-center">
+        <div className="shadow-lg p-10 bg-zinc-300/10 my-6 overflow-x-auto">
+          <h2 className="text-2xl text-center font-semibold mb-4">Attendance History</h2>
+          <table className="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
+                <th className="py-2 px-4 border-b">Id</th>
+                <th className="py-2 px-4 border-b">Name</th>
+                <th className="py-2 px-4 border-b">Date</th>
+                <th className="py-2 px-4 border-b">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {attendanceData.map((entry, index) => (
+                <tr key={index} className="hover:bg-gray-100">
+                  <td className="py-2 px-20 border-b">{entry.id}</td>
+                  <td className="py-2 px-20 border-b">{entry.name}</td>
+                  <td className="py-2 px-20 border-b">{entry.date}</td>
+                  <td className="py-2 px-20 border-b">{entry.time}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <button
-          onClick={() => signOut()}
-          className="bg-red-500 text-white font-bold px-6 py-2 mt-3"
-        >
-          Log Out
-        </button>
       </div>
     </div>
   );
