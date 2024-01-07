@@ -1,5 +1,6 @@
-import adduser from "@/components/adduser";
+import AddUserForm from "@/components/adduser";
 
-export default function adduser() {
-  return <adduser />;
+
+export default function Dashboard() {
+  return <AddUserForm/>;
 }

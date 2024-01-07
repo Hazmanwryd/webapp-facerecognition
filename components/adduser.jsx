@@ -1,34 +1,40 @@
+"use client";
+
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function AddUserForm() {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [photo, setPhoto] = useState(null); // For handling file upload
+  const [photo, setPhoto] = useState(null);
   const [error, setError] = useState("");
-
-  const router = useRouter();
-
+  const { data: session } = useSession();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Perform necessary actions, such as handling form data (name, phoneNumber, photo upload)
-    // For example: submit data to an API, handle file upload, etc.
-
     try {
-      // Assuming some API call or handling of data submission here
+      // Validate form data before submission
+      if (!name || !phoneNumber) {
+        setError("Name and Phone Number are required fields.");
+        return;
+      }
 
-      // After successful submission, redirect to dashboard or another page
-      router.replace("dashboard");
+      // Perform necessary actions, such as handling form data and photo upload
+      // Example: submit data to an API, handle file upload, etc.
+
+      // Simulate a delay to show loading state (replace with actual API calls)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // After successful submission, redirect to the dashboard or another page
+      router.replace("/dashboard");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError("Failed to add user. Please try again.");
     }
   };
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    // Do something with the selected file, such as setting state for file upload
     setPhoto(selectedFile);
   };
 
@@ -46,20 +52,27 @@ export default function AddUserForm() {
           />
           <input
             onChange={(e) => setPhoneNumber(e.target.value)}
-            type="text"
+            type="tel" // Use tel type for phone numbers
             placeholder="Phone Number"
             value={phoneNumber}
           />
-          <label htmlFor="fileInput" className="bg-blue-500 text-white font-bold cursor-pointer px-6 py-2 rounded-md text-center">
+          <label
+            htmlFor="fileInput"
+            className="bg-blue-500 text-white font-bold cursor-pointer px-6 py-2 rounded-md text-center"
+          >
             Upload Photo
           </label>
           <input
             id="fileInput"
             type="file"
+            accept="image/*"
             onChange={handleFileChange}
             className="hidden"
           />
-          <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
+          <button
+            type="submit"
+            className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2"
+          >
             Add User
           </button>
           {error && (
