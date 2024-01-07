@@ -3,6 +3,7 @@
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const attendanceData = [
   { id: "1", name: "John Doe", date: "2024-01-07", time: "09:00 AM" },
@@ -58,6 +59,11 @@ export default function Userinfo() {
               ))}
             </tbody>
           </table>
+          <div className="fixed bottom-4 left-4">
+        <Link href="/adduser">
+          <p className="bg-blue-500 text-white py-2 px-4 rounded-md text-sm">Add User</p>
+        </Link>
+        </div>
         </div>
       </div>
     </div>
