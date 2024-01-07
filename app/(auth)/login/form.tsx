@@ -29,7 +29,7 @@ export const Form = () => {
       if (!res?.error) {
         router.push(callbackUrl)
       } else {
-        setError('Invalid email or password')
+        setError('Invalid username or password')
       }
     } catch (err: any) {}
   }
