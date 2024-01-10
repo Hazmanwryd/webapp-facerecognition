@@ -1,4 +1,3 @@
-// Assuming your attendance data structure looks like this
 "use client";
 
 import { signOut } from "next-auth/react";
@@ -6,15 +5,15 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const attendanceData = [
-  { id: "1", name: "John Doe", date: "2024-01-07", time: "09:00 AM" },
-  { id: "2", name: "Jane Dae", date: "2024-01-06", time: "10:30 AM" },
-  { id: "3", name: "Jane Die", date: "2024-01-06", time: "11:30 AM" },
-  { id: "4", name: "Jane Due", date: "2024-01-06", time: "12:30 AM" },
-  { id: "5", name: "Jane Dee", date: "2024-01-06", time: "13:30 AM" },
-  { id: "6", name: "Jane Doe", date: "2024-01-06", time: "14:30 AM" },
-  { id: "7", name: "Jane Foe", date: "2024-01-06", time: "15:30 AM" },
-  { id: "8", name: "Jane Hoe", date: "2024-01-06", time: "16:30 AM" },
-  { id: "9", name: "Jane Joe", date: "2024-01-06", time: "17:30 AM" },
+  { id: "1", name: "John Doe", date: "2024-01-07", time: "09:00", status: "Check In" },
+  { id: "2", name: "Jane Dae", date: "2024-01-06", time: "10:30", status: "Check In"},
+  { id: "3", name: "Jane Die", date: "2024-01-06", time: "11:30", status: "Check In"},
+  { id: "4", name: "Jane Due", date: "2024-01-06", time: "12:30", status: "Check In"},
+  { id: "5", name: "Jane Dee", date: "2024-01-06", time: "13:30", status: "Check In"},
+  { id: "6", name: "Jane Doe", date: "2024-01-06", time: "14:30", status: "Check Out"},
+  { id: "7", name: "Jane Foe", date: "2024-01-06", time: "15:30", status: "Check Out"},
+  { id: "8", name: "Jane Hoe", date: "2024-01-06", time: "16:30", status: "Check Out"},
+  { id: "9", name: "Jane Joe", date: "2024-01-06", time: "17:30", status: "Check Out"},
 ];
 
 export default function Userinfo() {
@@ -46,6 +45,7 @@ export default function Userinfo() {
                 <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Date</th>
                 <th className="py-2 px-4 border-b">Time</th>
+                <th className="py-2 px-4 border-b">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -55,6 +55,7 @@ export default function Userinfo() {
                   <td className="py-2 px-20 border-b">{entry.name}</td>
                   <td className="py-2 px-20 border-b">{entry.date}</td>
                   <td className="py-2 px-20 border-b">{entry.time}</td>
+                  <td className="py-2 px-20 border-b">{entry.status}</td>
                 </tr>
               ))}
             </tbody>
